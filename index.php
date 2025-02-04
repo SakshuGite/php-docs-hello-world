@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $message = htmlspecialchars($_POST["message"]);
 
     // Simple Email Configuration (Replace with your email)
-    $to = "your-email@example.com";
+    $to = "your-email@example.com"; // Change this to your email
     $subject = "New Contact Form Submission";
     $body = "Name: $name\nEmail: $email\nMessage:\n$message";
     $headers = "From: $email";
@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         $message_sent = true;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -25,56 +24,141 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Learning Platform</title>
+    <title>EduLearn - Online Courses</title>
     <style>
+        /* General Styles */
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+        }
+        h1, h2 {
             text-align: center;
+            color: #004aad;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
             padding: 20px;
-            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        h1 { color: white; font-size: 2.5em; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
         .button {
-            background-color: #ff6f61; color: white; padding: 10px 20px; 
-            border: none; border-radius: 5px; cursor: pointer;
-            text-decoration: none; font-size: 1.2em;
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 16px;
+            background: #004aad;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
         }
-        .button:hover { background-color: #e65b55; }
-        input, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 5px; }
-        form { text-align: left; }
+        .button:hover {
+            background: #003080;
+        }
+
+        /* Header */
+        .header {
+            background: #004aad;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Course Section */
+        .courses {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .course-card {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .course-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .course-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .course-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            margin-top: 40px;
+            text-align: center;
+        }
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Welcome to Our E-Learning Platform</h1>
-
-    <div class="container">
-        <h2>Our Popular Courses</h2>
-        <ul>
-            <li><strong>Web Development</strong> - Learn HTML, CSS, JavaScript, and PHP</li>
-            <li><strong>Machine Learning</strong> - Get started with AI and Deep Learning</li>
-            <li><strong>Cybersecurity</strong> - Protect yourself and organizations from cyber threats</li>
-        </ul>
-        <a href="#contact" class="button">Contact Us</a>
+    <!-- Header -->
+    <div class="header">
+        <h1>EduLearn - Learn Online</h1>
     </div>
 
-    <div class="container" id="contact">
+    <!-- Course Section -->
+    <div class="container">
+        <h2>Popular Courses</h2>
+        <div class="courses">
+            <div class="course-card">
+                <img src="https://source.unsplash.com/300x200/?coding,technology" alt="Course 1">
+                <div class="course-title">Web Development</div>
+                <div class="course-desc">Learn HTML, CSS, JavaScript, and PHP.</div>
+                <a href="#" class="button">Enroll Now</a>
+            </div>
+
+            <div class="course-card">
+                <img src="https://source.unsplash.com/300x200/?ai,robotics" alt="Course 2">
+                <div class="course-title">Machine Learning</div>
+                <div class="course-desc">Introduction to AI, ML, and Deep Learning.</div>
+                <a href="#" class="button">Enroll Now</a>
+            </div>
+
+            <div class="course-card">
+                <img src="https://source.unsplash.com/300x200/?cybersecurity,hacking" alt="Course 3">
+                <div class="course-title">Cybersecurity</div>
+                <div class="course-desc">Protect yourself and organizations from cyber threats.</div>
+                <a href="#" class="button">Enroll Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="container contact-form" id="contact">
         <h2>Contact Us</h2>
         <?php if ($message_sent): ?>
             <p style="color: green;">Message sent successfully! We'll get back to you soon.</p>
         <?php endif; ?>
         <form method="post">
-            <label>Name:</label>
-            <input type="text" name="name" required>
-            
-            <label>Email:</label>
-            <input type="email" name="email" required>
-            
-            <label>Message:</label>
-            <textarea name="message" rows="4" required></textarea>
-
+            <input type="text" name="name" placeholder="Your Name" required><br>
+            <input type="email" name="email" placeholder="Your Email" required><br>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
             <input type="submit" name="submit" value="Send Message" class="button">
         </form>
     </div>
