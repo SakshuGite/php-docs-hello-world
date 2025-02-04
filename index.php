@@ -1,41 +1,25 @@
-# Set Variables
-RESOURCE_GROUP="EduPlatformRG"
-LOCATION="eastus"
-PHP_APP_NAME="edu-php-portal"
-MYSQL_SERVER_NAME="edu-mysql-server"
-MYSQL_DB_NAME="student_portal"
-ADMIN_USER="adminuser"
-ADMIN_PASS="StrongPass@123"
+<?php
+session_start();
+$conn = new mysqli("your-mysql-server.mysql.database.azure.com", "adminuser", "StrongPass@123", "student_portal");
 
-# Create Resource Group
-az group create --name $RESOURCE_GROUP --location $LOCATION
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-# Create MySQL Server & Database
-az mysql server create --name $MYSQL_SERVER_NAME \
-    --resource-group $RESOURCE_GROUP \
-    --location $LOCATION \
-    --admin-user $ADMIN_USER \
-    --admin-password $ADMIN_PASS \
-    --sku-name B_Gen5_2
+echo "<h2>Welcome to Student Portal</h2>";
 
-az mysql db create --name $MYSQL_DB_NAME \
-    --server-name $MYSQL_SERVER_NAME \
-    --resource-group $RESOURCE_GROUP
+$sql = "SELECT name, email FROM students";
+$result = $conn->query($sql);
 
-# Deploy PHP Web Application
-az webapp create --name $PHP_APP_NAME \
-    --resource-group $RESOURCE_GROUP \
-    --plan B1 \
-    --runtime "PHP|8.0"
+if ($result->num_rows > 0) {
+    echo "<table><tr><th>Name</th><th>Email</th></tr>";
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row["name"]."</td><td>".$row["email"]."</td></tr>";
+    }
+    echo "</table>";
+} else {
+    echo "No students found.";
+}
 
-# Configure MySQL Connection
-az webapp config appsettings set --name $PHP_APP_NAME \
-    --resource-group $RESOURCE_GROUP \
-    --settings DATABASE_URL="mysql://$ADMIN_USER:$ADMIN_PASS@$MYSQL_SERVER_NAME.mysql.database.azure.com/$MYSQL_DB_NAME"
-
-# Deploy PHP Code from GitHub (if not cloned manually)
-az webapp deployment source config --name $PHP_APP_NAME \
-    --resource-group $RESOURCE_GROUP \
-    --repo-url "https://github.com/your-repo/php-student-portal" \
-    --branch main \
-    --manual-integration
+$conn->close();
+?>
