@@ -24,48 +24,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduLearn - Online Courses</title>
+    <title>EduPro - Online Learning</title>
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7fc;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
         }
         h1, h2 {
             text-align: center;
-            color: #004aad;
         }
         .container {
-            width: 80%;
+            width: 85%;
             margin: auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            color: black;
+            margin-bottom: 20px;
         }
         .button {
             display: inline-block;
             padding: 12px 20px;
             font-size: 16px;
-            background: #004aad;
+            background: #6a11cb;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             transition: 0.3s;
         }
         .button:hover {
-            background: #003080;
+            background: #520aa3;
         }
 
         /* Header */
         .header {
-            background: #004aad;
-            color: white;
-            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 0;
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
         }
 
         /* Course Section */
@@ -92,10 +95,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             font-size: 18px;
             font-weight: bold;
             margin: 10px 0;
+            color: #6a11cb;
         }
         .course-desc {
             font-size: 14px;
-            color: #666;
+            color: #555;
         }
 
         /* Contact Form */
@@ -104,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             text-align: center;
         }
         input, textarea {
-            width: 80%;
+            width: 90%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -113,38 +117,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         form {
             text-align: center;
         }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <div class="header">
-        <h1>EduLearn - Learn Online</h1>
+        <h1>EduPro - Learn and Grow</h1>
     </div>
 
     <!-- Course Section -->
     <div class="container">
-        <h2>Popular Courses</h2>
+        <h2>Top Trending Courses</h2>
         <div class="courses">
             <div class="course-card">
                 <img src="https://source.unsplash.com/300x200/?coding,technology" alt="Course 1">
-                <div class="course-title">Web Development</div>
-                <div class="course-desc">Learn HTML, CSS, JavaScript, and PHP.</div>
-                <a href="#" class="button">Enroll Now</a>
+                <div class="course-title">Full Stack Web Development</div>
+                <div class="course-desc">Master HTML, CSS, JavaScript, React, and PHP.</div>
+                <a href="#" class="button">Start Now</a>
             </div>
 
             <div class="course-card">
                 <img src="https://source.unsplash.com/300x200/?ai,robotics" alt="Course 2">
-                <div class="course-title">Machine Learning</div>
-                <div class="course-desc">Introduction to AI, ML, and Deep Learning.</div>
-                <a href="#" class="button">Enroll Now</a>
+                <div class="course-title">AI & Machine Learning</div>
+                <div class="course-desc">Build intelligent models with Python & TensorFlow.</div>
+                <a href="#" class="button">Start Now</a>
             </div>
 
             <div class="course-card">
                 <img src="https://source.unsplash.com/300x200/?cybersecurity,hacking" alt="Course 3">
-                <div class="course-title">Cybersecurity</div>
-                <div class="course-desc">Protect yourself and organizations from cyber threats.</div>
-                <a href="#" class="button">Enroll Now</a>
+                <div class="course-title">Ethical Hacking & Cybersecurity</div>
+                <div class="course-desc">Protect systems and networks from cyber threats.</div>
+                <a href="#" class="button">Start Now</a>
+            </div>
+
+            <div class="course-card">
+                <img src="https://source.unsplash.com/300x200/?data,analysis" alt="Course 4">
+                <div class="course-title">Data Science & Analytics</div>
+                <div class="course-desc">Analyze and visualize data using Python & SQL.</div>
+                <a href="#" class="button">Start Now</a>
             </div>
         </div>
     </div>
@@ -155,12 +171,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         <?php if ($message_sent): ?>
             <p style="color: green;">Message sent successfully! We'll get back to you soon.</p>
         <?php endif; ?>
-        <form method="post">
-            <input type="text" name="name" placeholder="Your Name" required><br>
-            <input type="email" name="email" placeholder="Your Email" required><br>
-            <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
-            <input type="submit" name="submit" value="Send Message" class="button">
-        </form>
+        <div class="form-container">
+            <form method="post">
+                <input type="text" name="name" placeholder="Your Name" required><br>
+                <input type="email" name="email" placeholder="Your Email" required><br>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
+                <input type="submit" name="submit" value="Send Message" class="button">
+            </form>
+        </div>
     </div>
 
 </body>
